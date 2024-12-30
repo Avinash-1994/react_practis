@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import Information from './Information';
+import Crud from './Crud';
 
 function App() {
   return (
     <>
-      <Information name='Ayushman' skills={["HTML", "REACT", "Angular"]} age={50}/>
+      <Crud /> 
+      {/* <Information name='Ayushman' skills={["HTML", "REACT", "Angular"]} age={50}/> */}
     </>
   )
 }

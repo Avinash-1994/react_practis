@@ -18,9 +18,11 @@ function Crud(){
         }
     };
 
+    console.log(items);
+
     useEffect(() =>{
         fetchFruits()
-    }, [])
+    }, []);
 
     return (
         <div>

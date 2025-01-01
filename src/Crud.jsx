@@ -1,45 +1,63 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 function Crud(){
-    const [fruitName, setFruitName] = useState("");
-    const [items, setitem] = useState([]);
-
-    //  Fetch My fruits
-    const fetchFruits = async () => {
+    const [items, setItems] = useState([]);
+    const [itemValue, setitemValue] = useState("");
+    
+    // Data Fetch from API
+    const fetchItem = async () => {
         try {
             const response = await fetch('http://localhost:3000/items');
-            if (!response.ok) throw new Error("Faild, Please Recheck");
-            const data = await response.json();
-            // If succesfully Fetch the data from api
-            setitem(data);
-            
+            if (!response.ok) throw new Error("Failed To fetch api data");
+            const fetchedData = await response.json();
+            console.log(fetchedData);
+            setItems(fetchedData);
         } catch (error) {
-            consle.error("API Issue", error);
+            console.error("Error", error);
         }
     };
 
-    console.log(items);
+    // Data Post to API
+    const postData = async () => {
+        // Input blank or white space or blank spaces (Validation)
+        if(itemValue.trim() === "") return;
 
-    useEffect(() =>{
-        fetchFruits()
+        try {
+            const response = await fetch('http://localhost:3000/items', {
+                method: 'POST',
+                header: {"Content-Type": "application/json"},
+                body: JSON.stringify(
+                    {
+                      name: itemValue 
+                    }
+                ),
+            });
+            if (!response.ok) throw new Error("Failed To fetch api data");
+        } catch (error) {
+            console.error("Error", error);
+        }
+    }
+
+    useEffect(()=>{
+        fetchItem()
     }, []);
 
     return (
         <div>
-            <h1>Add Fruits</h1>
-            <form >
-                <input type="text"  />
-                <button type='button'>Add My fruits</button>
+            <form onSubmit={postData}>
+                <input type="text" onChange={(e) => {
+                    setitemValue(e.target.value)
+                }}  value={itemValue} />
+                <button type='submit'>Data Submit</button>
             </form>
-            <div>
-                <ul>
-                    {items.map((item) =>{
-                        <li key={item.id}>{item.name}</li>
-                    })}
-                </ul>
-            </div>
+            <ul>
+                {items.map((item) =>(
+                    <li key={item.id}>{item.name}</li>
+                ))}
+            </ul>
         </div>
     )
 }
+
 
 export default Crud;

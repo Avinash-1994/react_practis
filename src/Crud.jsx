@@ -14,7 +14,7 @@ function Crud(){
             setitem(data);
             
         } catch (error) {
-            consle.error("API Issue", error);
+            console.error("API Issue", error);
         }
     };
 
@@ -40,6 +40,6 @@ function Crud(){
             </div>
         </div>
     )
-}
+};
 
 export default Crud;

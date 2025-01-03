@@ -60,7 +60,6 @@ function Crud(){
         }
     }
 
-    
     // Check Post and Edit function
     const checkMyPostValidData = () =>{
         if(itemValue.trim() === "") return;
@@ -71,13 +70,11 @@ function Crud(){
         }
     };
 
-
     // Update Data (EDIT Only)
     const checkMyEditValidData = (item) =>{
         setUpdateItem(item);
         itemValue(item.name);
     };
-
 
     useEffect(()=>{
         fetchItem()

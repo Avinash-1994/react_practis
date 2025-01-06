@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Object from './Object';
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
 
   return (
     <div>
-        <h1>{greeting}</h1>
+        {/* <h1>{greeting}</h1> */}
+        <Object></Object>
     </div>
   )
 }
